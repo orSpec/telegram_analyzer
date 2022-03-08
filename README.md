@@ -27,3 +27,29 @@ options:
                         Show the top n members by messages and their message count. Need to pass n > 0 as input
 ```
 
+## Examples
+```
+-s
+```
+![image](https://user-images.githubusercontent.com/59450716/157318093-edef0288-38f9-444b-b35f-a398c87113ad.png)
+
+
+```
+-ma
+```
+![image](https://user-images.githubusercontent.com/59450716/157317931-1b7203bf-e6b2-4c1e-869e-a1e789ba5901.png)
+
+```
+-w
+```
+<img src="https://user-images.githubusercontent.com/59450716/157318289-d6b6c08f-b3d0-46c0-b5da-5f28430185ed.png" width="700">
+
+```
+-t
+```
+<img src="https://user-images.githubusercontent.com/59450716/157318617-4a9195d9-c8b8-4617-9156-bc21cf5e9314.png" width="800">
+
+```
+-dh
+```
+<img src="https://user-images.githubusercontent.com/59450716/157318706-f0e0de57-0994-45a5-bc1a-c0e3399f525e.png" width="900">
