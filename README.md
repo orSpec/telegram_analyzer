@@ -22,6 +22,8 @@ options:
   -dh [UserID ...], --daysHours [UserID ...]
                         Create heatmap of posting days vs. times for all users or certain UserIDs
   -w, --weekday         Create chart of messages per weekday
-  -s, --statistics      show statistics (#members, #messages, #mean nr of messages etc.)
+  -s, --statistics      Show statistics (#members, #messages, #mean nr of messages etc.)
+  -ma n, --mostActive n
+                        Show the top n members by messages and their message count. Need to pass n > 0 as input
 ```
 
