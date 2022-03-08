@@ -111,20 +111,6 @@ def getNMostActiveUser(df,n=None):
 
     return mostActive
 
-def mostActiveUsersPieChart(df, n=None,save=False):
-    mostActiveUsers = getNMostActiveUser(df,n)
-
-    fig, ax = plt.subplots(figsize=(10, 10))
-    g = ax.pie(mostActiveUsers["Messages"], labels=mostActiveUsers["Name"], autopct="%1.1f%%", labeldistance=1.05, startangle=90)
-    plt.axis('equal')
-    plt.title("Message share per user", fontdict={"fontsize": 30})
-
-    plt.label()
-
-    if save:
-        plt.savefig("mostActiveUsers.png")
-
-    return g
 
 def getStatistics(df):
 
@@ -145,6 +131,17 @@ def getStatistics(df):
     
     return pd.DataFrame.from_dict(dic,orient="index",columns=["Value"]).reset_index().rename(columns={"index" : "Parameter"})
 
+def isPositiveValue(input):
+    try:
+        value = int(input)
+    except ValueError:
+        raise argparse.ArgumentTypeError("invalid value: must be a positive int")
+
+    if value <= 0:
+        raise argparse.ArgumentTypeError("invalid value: must be a positive int")
+
+    return value
+
 def main():
     parser = argparse.ArgumentParser(description="Analyse a Telegram JSON file. Simply read the file in and create insights.")
 
@@ -156,7 +153,10 @@ def main():
     parser.add_argument("-w", "--weekday", action="store_true", help="Create chart of messages per weekday")
 
     parser.add_argument("-s", "--statistics", action="store_true",
-                        help = "show statistics (#members, #messages, #mean nr of messages etc.)")
+                        help = "Show statistics (#members, #messages, #mean nr of messages etc.)")
+
+    parser.add_argument("-ma", "--mostActive", type=isPositiveValue, metavar="n",
+                        help = "Show the top n members by messages and their message count. Need to pass n > 0 as input")            
 
     args = parser.parse_args()
 
@@ -175,6 +175,11 @@ def main():
     if args.statistics:
         stats = getStatistics(df)
         print(tabulate(stats, tablefmt='psql', showindex=False))
+
+    if args.mostActive:
+        nrUsers = args.mostActive
+        most_active = getNMostActiveUser(df,nrUsers)
+        print(tabulate(most_active, headers="keys", tablefmt='psql', showindex=False))
 
 if __name__ == "__main__":
         main()
